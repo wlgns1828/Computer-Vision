@@ -9,7 +9,7 @@ from torch.optim.lr_scheduler import StepLR
 # gpu 및 모델 설정
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = resnet18().to(device)
-#model = models.resnet34(pretrained = False).to(device)
+#model = models.resnet18(pretrained = False).to(device)
 
 
 loss_func = nn.CrossEntropyLoss(reduction='sum')
@@ -20,7 +20,7 @@ opt = optim.SGD(model.parameters(), lr=0.001, weight_decay=0.0001, momentum=0.9)
 lr_scheduler = StepLR(opt, step_size=10, gamma=0.1)
 
 # 손실 값과 정확도를 저장할 경로 설정
-save_dir = './training_history_34(cifar10)'
+save_dir = './training_history_18(cifar10)'
 
 # 폴더 생성
 createFolder(save_dir)
@@ -29,7 +29,7 @@ createFolder('./models')
 # 파라미터 설정
 def get_params_train():
     params_train = {
-        'num_epochs':30,
+        'num_epochs':50,
         'optimizer':opt,
         'loss_func':loss_func,
         'train_dl':train_dl,
