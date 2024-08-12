@@ -8,7 +8,7 @@ import csv
 
 num_epochs = 50
 
-folder_path = './training_history'
+folder_path = './training_history18(cifar10)'
 file_names = os.listdir(folder_path)
 
 loss_hist = {"train": [], "val": []}
