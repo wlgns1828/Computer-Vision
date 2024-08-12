@@ -5,11 +5,12 @@ import torch
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.optim.lr_scheduler import StepLR
+from torchvision import models
 
 # gpu 및 모델 설정
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = resnet18().to(device)
-#model = models.resnet18(pretrained = False).to(device)
+#model = models.resnet18(weights=None).to(device)
 
 
 loss_func = nn.CrossEntropyLoss(reduction='sum')
