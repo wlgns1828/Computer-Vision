@@ -27,17 +27,40 @@
 ## main.py
   학습을 하고 싶을 경우 main.py를 실행해주시면 됩니다.
 
-  수정사항:
-    1. model = resnet18().to(device)
+  ## 수정사항:
+    
+    1. 
+    model = resnet18().to(device)
       ResNet은 사이즈가 여러개 존재합니다. 기본적으로 18개의 레이어로 학습을 하도록 구현되어 있습니다.
       다른 사이즈로 학습을 하고 싶은 경우 위 코드에서 18을 34, 50, 101, 152 중 원하는 것으로 바꿔주시면 됩니다.
     
-    2. loss_func = nn.CrossEntropyLoss(reduction='sum')
-       opt = optim.SGD(model.parameters(), lr=0.001, weight_decay=0.0001, momentum=0.9)
+    2. 
+    loss_func = nn.CrossEntropyLoss(reduction='sum')
+    opt = optim.SGD(model.parameters(), lr=0.001, weight_decay=0.0001, momentum=0.9)
        위 코드는 학습시 사용될 손실함수와 옵티마이저 입니다. 필요에 따라 수정해주세요.
+   
+    3.
+    def get_params_train():
+    params_train = {
+        'num_epochs':30,
+        'optimizer':opt,
+        'loss_func':loss_func,
+        'train_dl':train_dl,
+        'val_dl':val_dl,
+        'sanity_check':False,
+        'lr_scheduler':lr_scheduler,
+        'path2weights':'./models/weights_18(cifar10).pt',
+    }
+    return params_train
+    파라미터 값을 여기서 설정하시면 됩니다. 학습 epoch와 lr_scheduler를 원하시는 학습과정으로 변경해주시면 됩니다.
 
 
+# 실행
+
+    
   python main.py
+
+
   
   위 코드를 입력하면 학습을 시작합니다. models 디렉토리에 최종 weight가 저장됩니다.
   training_history18(cifar10) 디렉토리에 train과 val의 loss, accuracy, 학습시 소요된 시간이 csv파일로 각각 저장됩니다.
