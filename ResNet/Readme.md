@@ -1,69 +1,74 @@
-본 코드는 ResNet을 구현해보기 위해 구조를 하나하나 코드로 작성하였습니다.
-코드를 실행할 시 아래 내용에 맞게 수정이 필요합니다.(디렉토리 위치)
+# ResNet 구현 (CIFAR-10)
 
+본 코드는 **ResNet**을 구현하기 위해 구조를 하나하나 코드로 작성한 예제입니다. 이 구현은 CIFAR-10 데이터셋을 사용하여 ResNet 모델을 학습시키는 코드로 구성되어 있습니다.
+ResNet 논문: [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 
-총 5개의 파일이 존재합니다.
+총 5개의 파일이 존재합니다:
 
-1. load_dataset.py
-2. model.py
-3. train.py
-4. main.py
-5. graph.py
+1. `load_dataset.py`
+2. `model.py`
+3. `train.py`
+4. `main.py`
+5. `graph.py`
 
+## 파일 설명
 
-## load_dataset.py
-  데이터셋을 준비하는 코드 입니다. 기본적으로 cifar10 파일을 다운로드하고 데이터로더로 불러옵니다.
-  cifar10 데이터셋을 저장할 위치인 path2data를 본인의 디렉토리 위치에 맞게 수정해주세요.
+### `load_dataset.py`
+이 파일은 데이터셋을 준비하는 코드입니다. 기본적으로 CIFAR-10 데이터를 다운로드하고 데이터로더로 불러옵니다. 
 
-## model.py
-  모델 사이즈에 따라 구조가 코드로 구현되어있습니다. 수정할 부분은 없습니다.
-  ResNet의 구조를 자세히 알고 싶다면 이 코드를 공부해주세요.
+- **주의사항**: `cifar10` 데이터셋을 저장할 위치인 `path2data`를 본인의 디렉토리 위치에 맞게 수정해 주세요.
 
-## train.py
-  모델의 학습과정에 대한 코드입니다. 학습에 필요한 함수들만 구현한 것이기 때문에 수정할 부분은 없습니다.
-  학습의 결과를 저장하는 코드도 작성되어 있습니다. training, test의 loss, accuracy, 학습시간을 저장하는 코드가 구현되어 있습니다.
-  학습을 하고 싶을 때 train.py를 실행하는 것이 아닌 main.py를 실행해야 합니다.
+### `model.py`
+이 파일은 ResNet 모델의 구조를 코드로 구현하고 있습니다. 모델 사이즈에 따라 구조가 다르게 작성되어 있으며, 현재 18개의 레이어로 학습되도록 구현되어 있습니다. ResNet의 구조를 자세히 알고 싶다면 이 코드를 참고해 주세요.
 
-## main.py
-  학습을 하고 싶을 경우 main.py를 실행해주시면 됩니다.
+- **참고**: 모델 구조를 변경하고 싶다면, 이 파일을 수정하여 다른 사이즈의 ResNet을 구현할 수 있습니다.
 
-  ## 수정사항:
-    
-    1. 
+### `train.py`
+이 파일은 모델의 학습 과정에 대한 코드입니다. 학습에 필요한 함수들이 구현되어 있으며, 학습 결과를 저장하는 코드도 포함되어 있습니다. 
+
+- **주의사항**: 학습을 진행하려면 `train.py`를 직접 실행하는 것이 아닌, `main.py`를 실행해 주세요.
+
+### `main.py`
+이 파일은 학습을 시작하는 주요 스크립트입니다. `main.py`를 실행하면 모델 학습이 시작됩니다.
+
+#### 수정사항:
+
+1. **모델 사이즈 설정**:
+    ```python
     model = resnet18().to(device)
-      ResNet은 사이즈가 여러개 존재합니다. 기본적으로 18개의 레이어로 학습을 하도록 구현되어 있습니다.
-      다른 사이즈로 학습을 하고 싶은 경우 위 코드에서 18을 34, 50, 101, 152 중 원하는 것으로 바꿔주시면 됩니다.
-    
-    2. 
+    ```
+    ResNet의 사이즈를 변경하려면, 위 코드에서 `18`을 `34`, `50`, `101`, `152` 중 원하는 값으로 바꿔 주세요.
+
+2. **손실 함수 및 옵티마이저 설정**:
+    ```python
     loss_func = nn.CrossEntropyLoss(reduction='sum')
     opt = optim.SGD(model.parameters(), lr=0.001, weight_decay=0.0001, momentum=0.9)
-       위 코드는 학습시 사용될 손실함수와 옵티마이저 입니다. 필요에 따라 수정해주세요.
-   
-    3.
+    ```
+    손실 함수와 옵티마이저를 필요에 따라 수정해 주세요.
+
+3. **학습 파라미터 설정**:
+    ```python
     def get_params_train():
-    params_train = {
-        'num_epochs':30,
-        'optimizer':opt,
-        'loss_func':loss_func,
-        'train_dl':train_dl,
-        'val_dl':val_dl,
-        'sanity_check':False,
-        'lr_scheduler':lr_scheduler,
-        'path2weights':'./models/weights_18(cifar10).pt',
-    }
-    return params_train
-    파라미터 값을 여기서 설정하시면 됩니다. 학습 epoch와 lr_scheduler를 원하시는 학습과정으로 변경해주시면 됩니다.
+        params_train = {
+            'num_epochs': 30,
+            'optimizer': opt,
+            'loss_func': loss_func,
+            'train_dl': train_dl,
+            'val_dl': val_dl,
+            'sanity_check': False,
+            'lr_scheduler': lr_scheduler,
+            'path2weights': './models/weights_18(cifar10).pt',
+        }
+        return params_train
+    ```
+    학습 epoch 수와 `lr_scheduler` 등의 파라미터를 설정해 주세요.
 
+### `graph.py`
+이 파일은 학습 결과를 그래프로 시각화하는 코드입니다. `training_history18(cifar10)` 디렉토리에 저장된 CSV 파일에서 train 및 validation의 손실, 정확도를 그래프로 보여줍니다.
 
-# 실행
+## 실행 방법
 
-    
-  python main.py
+학습을 시작하려면 다음 명령어를 사용하세요:
 
-
-  
-  위 코드를 입력하면 학습을 시작합니다. models 디렉토리에 최종 weight가 저장됩니다.
-  training_history18(cifar10) 디렉토리에 train과 val의 loss, accuracy, 학습시 소요된 시간이 csv파일로 각각 저장됩니다.
-
-  ## graph.py
-    학습 결과를 그래프로 보여주는 코드입니다. csv 파일에 저장된 train, val의 loss, accuracy를 그래프로 보여줍니다.
+```bash
+python main.py
