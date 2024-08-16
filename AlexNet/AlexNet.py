@@ -165,36 +165,6 @@ if __name__ == '__main__': #해당 스크립트를 직접 실행할 때만 실�
         test(alexnet, device, test_data_loader)
 
 
-
-
-######################################################################## 아래 코드는 summarywriter를 연습해보기 위해 구현해 본 것으로 논문과는 상관 없음###############################################################################
-    # def train(model, device, training_data_loader, optimizer):
-    #     total_step=1
-    #     for epoch in range(NUM_EPOCH):
-    #         model.train()
-    #         for (batch_idx), (imgs, classes) in enumerate(training_data_loader):
-    #             imgs, classes  = imgs.to(device), classes.to(device)
-                
-                
-    #             # 손실함수 계산
-    #             output = alexnet(imgs)
-    #             loss = criterion(output, classes)
-                
-    #             # 파라미터 업데이트
-    #             optimizer.zero_grad()
-    #             loss.backward()
-    #             optimizer.step()
-    
-                
-    #             if(batch_idx % 50 == 0):
-    #                 with torch.no_grad():
-    #                     _, preds = torch.max(output, 1)
-    #                     accuracy = torch.sum(preds == classes)
-
-    #                     print('Epoch: {} \tBatchidx: {} \tLoss: {:.4f} \tAcc: {}'
-    #                         .format(epoch + 1, batch_idx, loss.item(), accuracy.item()))
-    #                     tbwriter.add_scalar('loss', loss.item(), batch_idx)
-    #                     tbwriter.add_scalar('accuracy', accuracy.item(), batch_idx)
         
 
 
