@@ -1,6 +1,7 @@
 # ResNet 구현 (CIFAR-10)
 
 본 코드는 **ResNet**을 구현하기 위해 구조를 하나하나 코드로 작성한 예제입니다. 이 구현은 CIFAR-10 데이터셋을 사용하여 ResNet 모델을 학습시키는 코드로 구성되어 있습니다.
+
 ResNet 논문: [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 
 총 5개의 파일이 존재합니다:
