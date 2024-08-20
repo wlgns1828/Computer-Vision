@@ -76,6 +76,8 @@
     csv 파일을 이용해 그래프를 그려 시각화 합니다.
     result 파일에 그래프를 png 형식으로 저장합니다.
 
+![alt text](classfication/model/AlexNet/result/training_results.png)
+
 -----
 
 ## 📌 훈련 방법
@@ -84,17 +86,25 @@
 
 > git.clone ~~
 
+<br>
+
 필요한 패키지를 install 합니다.
 
 pip install -r requirements.txt
+
+<br>
 
 디렉토리 위치를 훈련하고 싶은 모델로 이동합니다.
 
 > cd ./classification/model/AlexNet
 
+<br>
+
 예시로 AlexNet 폴더로 이동했습니다.
 
 훈련을 시작합니다.
+
+<br>
 
 > python train.py
 
