@@ -13,23 +13,82 @@
 
 1. [프로젝트 구조](#프로젝트-구조)
 
-2. [사용법](#사용법)
-    - [데이터셋](#데이터셋)
-    - [파라미터 설정](#파라미터-설정)
-    - [모델 구조](#모델-구조)
-    - [훈련](#훈련)
-    - [그래프](#그래프)
-3. [파일 설명](#파일-설명)
+2. [파일 설명](#파일-설명)
+    - [load_dataset.py](#load_dataset.py)
+    - [set_parameter.py](#set_parameter.py)
+    - [model.py](#model.py)
+    - [train.py](#train.py)
+    - [graph.py](#graph.py)
+3. [훈련 방법](#훈련-방법)
 
 
 ## 프로젝트 구조
 
-classification/
-├── dataset/
-│ └── [이미지 데이터셋]
-├── model/
-│ ├── AlexNet/
-│ ├── GoogLeNet/
-│ ├── LeNet5/
-│ ├── ResNet/
-│ └── VGGNet/
+- classification
+    - dataset
+
+    - model
+        - LeNet5
+        - AlexNet
+        - GoogLeNet
+        - VGGNet
+        - ResNet
+
+각 모델 이름이 적힌 폴더 안에는 아래 파일들이 들어 있습니다.
+
+- load_dataset.py
+- set_parameter.py
+- model.py
+- train.py
+- grapy.ph
+
+## 파일 설명
+
+### load_dataset.py
+
+훈련에 사용할 이미지를 다운로드 하고 DataLoader로 불러옵니다.
+Mnist, FashionMnist, Cifar10 데이터셋 등 모델마다 데이터셋이 다릅니다.
+
+훈련에 사용할 데이터셋을 변경하고 싶으시다면 해당 파일의 코드를 수정해주세요.
+
+### set_parameter.py
+
+훈련에 사용되는 파라미터 값을 정합니다.
+learning rate, num_epoch, num_class 등 필요따라 수정해주세요.
+
+### model.py
+
+논문에서 소개한 모델을 구현한 코드 입니다.
+해당 논문을 공부하고 싶다면 이 파일을 중심적으로 봐주세요.
+
+### train.py
+
+훈련 과정이 작성된 파일입니다.
+훈련 과정이나 결과를 저장하는 방식을 변경하고 싶다면 해당 코드를 수정해주세요.
+
+### graph.py
+
+훈련 결과를 저장하고 그래프로 표현하는 함수가 저장된 파일입니다.
+epoch 마다 loss와 accuracy를 csv 파일에 저장합니다.
+csv 파일을 이용해 그래프를 그려 시각화 합니다.
+result 파일에 그래프를 png 형식으로 저장합니다.
+
+## 훈련 방법
+
+코드를 클론 합니다.
+
+> git.clone ~~
+
+
+디렉토리 위치를 훈련하고 싶은 모델로 이동합니다.
+
+> cd ./classification/model/AlexNet
+
+예시로 AlexNet 폴더로 이동했습니다.
+
+훈련을 시작합니다.
+
+> python train.py
+
+훈련결과 result 폴더가 생성되며 csv파일과, 훈련 결과 그래프가 png파일로 저장됩니다.
+
