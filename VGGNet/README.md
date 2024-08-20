@@ -76,7 +76,8 @@
     csv 파일을 이용해 그래프를 그려 시각화 합니다.
     result 파일에 그래프를 png 형식으로 저장합니다.
 
-![alt text](classfication/model/AlexNet/result/training_results.png)
+![training_results](https://github.com/user-attachments/assets/6edc9b4b-1883-4e8b-b7d7-4d986d2eec56)
+
 
 -----
 
