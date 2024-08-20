@@ -84,13 +84,14 @@
 
 깃허브에서 코드를 가져옵니다.
 
-> git.clone ~~
+> git clone https://github.com/wlgns1828/Computer-Vision.git
 
 <br>
 
 필요한 패키지를 install 합니다.
 
-pip install -r requirements.txt
+> cd Computer-Vision
+> pip install -r requirements.txt
 
 <br>
 
